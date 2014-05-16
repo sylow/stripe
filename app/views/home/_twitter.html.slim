@@ -1,7 +1,3 @@
-- if current_user
-  = render 'new'
-- else
-  = render 'user'
 /! PAGE | TWITTER
 #page-twitter.pages.white.paralax.page-twitter
   /! Page overlay
@@ -14,5 +10,6 @@
         /! Load Twitter boostrap container
         #twitterfeed-slider.twitterfeed.center.slide
         /! Sub title / Name of twitter account
-        h5.center @sylow
+        h5.center
+          a href='http://twitter.com/sylow' @sylow
 /! END PAGE | TWITTER

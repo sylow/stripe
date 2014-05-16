@@ -4,5 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_many :subscriptions
+  has_one :subscription
+  
+  def valid_subscription?
+    subscription && subscription.valid_subscription?
+  end
+
 end

@@ -18,8 +18,7 @@ ActiveRecord::Schema.define(version: 20140516092355) do
 
   create_table "subscriptions", force: true do |t|
     t.integer  "user_id"
-    t.datetime "expires_at"
-    t.string   "stripe_token"
+    t.string   "stripe_customer_token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,9 @@
+- if current_user
+  - if current_user.valid_subscription?
+    = render 'subscribed'
+  - else
+    = render 'subscriptions/new'    
+- else
+  = render 'user'
+
+= render 'twitter'

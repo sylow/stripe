@@ -5,7 +5,10 @@
         small 
           = link_to 'Sign out', destroy_user_session_path, method: :delete
       h4.line-divider Payment
+    .well
+      | You will be charged $19 recurring monthly
     = form_for @subscription do |f|
+      = f.hidden_field :stripe_token
       - if @subscription.errors.any?
         div class="error_messages"
           ul

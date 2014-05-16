@@ -21,10 +21,5 @@
 //= require plugins/jquery.mixitup.min.js
 //= require plugins/jquery.nav.min.js
 //= require plugins/jquery.parallax-1.1.3.min.js
-//= require plugins/jquery.responsivevideos.min.js
 //= require plugins/jquery.scrollTo.min.js
-//= require plugins/jquery.tweet.min.js
-//= require plugins/jquery.tweetCarousel.min.js
-//= require plugins/jquery.tweetCarousel.min.js
-//= require plugins/jquery.tweetCarousel.min.js
 //= require application/source/application.js

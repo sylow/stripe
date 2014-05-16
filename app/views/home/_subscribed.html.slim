@@ -1,0 +1,11 @@
+#page-about.pages.page-about
+  .container
+    header
+      .text-right
+        small 
+          = link_to 'Sign out', destroy_user_session_path, method: :delete
+      h4.line-divider Paying member
+    .well
+      | You are subscribed to our service 
+      small.pull-right
+        = link_to "Cancel subscription", current_user.subscription, method: :delete, class: 'btn btn-small btn-warning'

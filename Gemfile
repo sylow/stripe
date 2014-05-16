@@ -36,9 +36,15 @@ gem 'devise'
 
 # payments 
 gem 'stripe'
+
+# background processing
+gem 'sidekiq'
+
 group :production do
   gem 'rails_12factor'
 end
+
+gem 'dotenv-rails', :groups => [:development, :test]
 
 group :production, :staging do
   gem 'dalli', '~> 1.1.4'

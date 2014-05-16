@@ -1,6 +1,8 @@
 StripeSample::Application.routes.draw do
+  get "home/index"
+  post 'callback/index'
   devise_for :users
   resources :subscriptions
   
-  root 'subscriptions#index'
+  root 'home#index'
 end
