@@ -1,0 +1,16 @@
+#page-about.pages.page-about
+  .container
+    br
+    .alert 
+      | You need to sign up/in before you can proceed to payment page
+      button type="button" class="close" data-dismiss="alert"
+    	  i class="icon-remove-sign"
+    .row
+      .span4
+        /! Header
+        h5 Sign up
+        = render 'devise/registrations/new' 
+      .span2
+      .span4
+        h5 Sign in
+        = render 'devise/sessions/new' 
