@@ -11,10 +11,7 @@ class Subscription < ActiveRecord::Base
   
   # Plans should go to their own tables
   PLAN_ID = 1
-  def valid_subscription?
-    !stripe_customer_token.blank?
-  end
-  
+
   private
   def create_stripe_customer
     customer = Stripe::Customer.create(plan: PLAN_ID, description: user.email, card: stripe_token)

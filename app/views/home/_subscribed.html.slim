@@ -8,4 +8,4 @@
     .well
       | You are subscribed to our service 
       small.pull-right
-        = link_to "Cancel subscription", current_user.subscription, method: :delete, class: 'btn btn-small btn-warning'
+        = link_to "Cancel subscription", @subscription, method: :delete, class: 'btn btn-small btn-warning'
