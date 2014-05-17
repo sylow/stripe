@@ -4,7 +4,6 @@ class Subscription < ActiveRecord::Base
 
   # hooks
   validate :create_stripe_customer, on: :create  
-  before_create :set_customer_token
   before_destroy :remove_subscription_from_stripe
   
   # token
