@@ -1,8 +1,7 @@
 StripeSample::Application.routes.draw do
-  get "home/index"
-  post 'stripe/webhook'
   devise_for :users
   resources :subscriptions
-  
+
+  post 'stripe/webhook'
   root 'home#index'
 end

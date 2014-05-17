@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_one :subscription
   
   def valid_subscription?
-    subscription && subscription.valid_subscription?
+    subscription && subscription.active?
   end
 
 end
