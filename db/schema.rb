@@ -11,14 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516092355) do
+ActiveRecord::Schema.define(version: 20140517051829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "subscription_histories", force: true do |t|
+    t.string   "stripe_customer_token"
+    t.string   "notification_type"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "subscriptions", force: true do |t|
     t.integer  "user_id"
     t.string   "stripe_customer_token"
+    t.boolean  "active",                default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
