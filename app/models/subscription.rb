@@ -9,6 +9,8 @@ class Subscription < ActiveRecord::Base
   # token
   attr_accessor :stripe_token  
   
+  # Plans should go to their own tables
+  PLAN_ID = 1
   def valid_subscription?
     !stripe_customer_token.blank?
   end
