@@ -18,7 +18,6 @@ class Subscription < ActiveRecord::Base
   
   private
   def create_stripe_customer
-  begin
     customer = Stripe::Customer.create(plan: PLAN_ID, description: user.email, card: stripe_token)
     self.stripe_customer_token = customer.id
   rescue Stripe::CardError => e      
