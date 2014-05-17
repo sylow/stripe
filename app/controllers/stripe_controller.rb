@@ -6,14 +6,14 @@ class StripeController < ApplicationController
 
     # Transaction history
     SubscriptionHistory.create({
-                                 stripe_customer_token: event.card.customer,
+                                 stripe_customer_token: event.data.card.customer,
                                  data: request.body.read,
                                  notification_type: event.type
                                }
                                )    
                                
     # Does this client has a subscription with us?
-    if subscription = Subscription.where(stripe_customer_token: event.card.customer).first      
+    if subscription = Subscription.where(stripe_customer_token: event.data.card.customer).first      
       if event.type == "charge.failed"        # if something goes wrong let our client know it
         UserMailer.payment_failure(subscription.user).deliver    
       elsif event.type == "charge.succeeded"  # Activate this client if charge is successful
