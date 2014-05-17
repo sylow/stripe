@@ -1,7 +1,7 @@
 class StripeController < ApplicationController
   protect_from_forgery except: :webhook
   
-  def stripe
+  def webhook
     event = JSON.parse(request.body.read)
 
     # Transaction history
