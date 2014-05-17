@@ -11,14 +11,16 @@ class StripeController < ApplicationController
                                  notification_type: event.type
                                }
                                )    
-    # if something goes wrong let our client know it
-    if event.type == "charge.failed"
-      if subscription = Subscription.where(stripe_customer_token: event.card.customer).first
+                               
+    # Does this client has a subscription with us?
+    if subscription = Subscription.where(stripe_customer_token: event.card.customer).first      
+      if event.type == "charge.failed"        # if something goes wrong let our client know it
         UserMailer.payment_failure(subscription.user).deliver    
+      elsif event.type == "charge.succeeded"  # Activate this client if charge is successful
+        subscription.update_attribute(:active, true)    
       end
-    end
+    end        
     
-    #lets please stripe by returning ok
-    head :ok
+    head :ok # stripe requires us to return ok
   end
 end
