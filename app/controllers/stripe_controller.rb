@@ -15,10 +15,10 @@ class StripeController < ApplicationController
                                
     # Does this client has a subscription with us?
     if subscription = Subscription.where(stripe_customer_token: customer_token).first      
-      if notification_type == "charge.failed"        # if something goes wrong let our client know it
+      if notification_type == "invoice.payment_failed"        # if something goes wrong let our client know it
         UserMailer.payment_failure(subscription.user).deliver    
         subscription.update_attribute(:active, false)    
-      elsif notification_type == "charge.succeeded"  # Activate this client if charge is successful
+      elsif notification_type == "invoice.payment_succeeded"  # Activate this client if charge is successful
         subscription.update_attribute(:active, true)    
       end
     end        
