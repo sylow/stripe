@@ -122,6 +122,12 @@ GEM
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.4)
+    postmark (1.2.0)
+      json
+      rake
+    postmark-rails (0.7.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.2.0)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -252,6 +258,7 @@ DEPENDENCIES
   mocha
   oj
   pg
+  postmark-rails
   rabl
   railroady
   rails (= 4.0.2)

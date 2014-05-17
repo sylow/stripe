@@ -37,6 +37,9 @@ gem 'devise'
 # payments 
 gem 'stripe'
 
+# Email management
+gem 'postmark-rails'
+
 group :production do
   gem 'rails_12factor'
 end
