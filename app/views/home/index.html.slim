@@ -1,9 +1,9 @@
 - if current_user
   - if current_user.valid_subscription?
-    = render 'subscribed'
+    = render 'home/subscribed'
   - else
     = render 'subscriptions/new'    
 - else
-  = render 'user'
+  = render 'home/user'
 
-= render 'twitter'
+= render 'home/twitter'
