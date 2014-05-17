@@ -3,7 +3,7 @@ class StripeController < ApplicationController
   
   def webhook
     event = JSON.parse(request.body.read)
-    customer_token = event.fetch("data").fetch("card").fetch("customer")
+    customer_token = event.fetch("data").fetch("object").fetch("customer")
     notification_type = event.fetch("type")
     # Transaction history
     SubscriptionHistory.create( {
@@ -17,6 +17,7 @@ class StripeController < ApplicationController
     if subscription = Subscription.where(stripe_customer_token: customer_token).first      
       if notification_type == "charge.failed"        # if something goes wrong let our client know it
         UserMailer.payment_failure(subscription.user).deliver    
+        subscription.update_attribute(:active, false)    
       elsif notification_type == "charge.succeeded"  # Activate this client if charge is successful
         subscription.update_attribute(:active, true)    
       end
