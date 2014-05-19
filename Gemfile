@@ -68,13 +68,15 @@ group :development, :test do
   gem 'spork-rails', github: 'sporkrb/spork-rails' # rubygems version not rails 4 compatible
   gem 'guard-spork'
   gem 'childprocess'
-end
-
-group :test do
   gem 'fabrication'
   gem 'forgery'
-  gem 'mocha'
+end
+
+
+group :test do
   gem 'database_cleaner'
+  gem 'mocha'  
+  gem 'stripe-ruby-mock'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
