@@ -2,27 +2,30 @@
   .container
     header
       .text-right
-        small 
+        small
           = link_to 'Sign out', destroy_user_session_path, method: :delete
       h4.line-divider Payment
     .well
       | You will be charged $19 recurring monthly
     = form_for @subscription do |f|
-      = f.hidden_field :stripe_token
-      - if @subscription.errors.any?
-        div class="error_messages"
-          ul
-          - @subscription.errors.full_messages.each do |msg| 
-            li= msg
+      = hidden_field_tag :stripe_token
+      - if @subscription.errors.any? || flash[:notice].present?
+        .alert.alert-danger
+          - @subscription.errors.full_messages.each do |msg|
+            = msg
+            br
+          - if flash[:notice]
+            = flash[:notice]
+            br
       .field
-        = label_tag :card_number, "Credit Card Number " 
-        = text_field_tag :card_number, nil, name: nil 
+        = label_tag :card_number, "Credit Card Number "
+        = text_field_tag :card_number, nil, name: nil
       .field
-        = label_tag :card_code, "CC Security Code (CVV)" 
+        = label_tag :card_code, "CC Security Code (CVV)"
         = text_field_tag :card_code, nil, name: nil
       .field
-        = label_tag :card_month, "CC Expiration" 
+        = label_tag :card_month, "CC Expiration"
         = select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"}
         = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
       .actions
-        = f.submit "Subscribe", class: 'btn'    
+        = f.submit "Subscribe", class: 'btn'

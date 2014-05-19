@@ -1,10 +1,16 @@
 class SubscriptionsController < ApplicationController
   def create
-    @subscription = current_user.subscription || current_user.build_subscription(subscription_params)
-    if @subscription.save
-      redirect_to root_path, :notice => "Thank you for subscribing to our services."
+    customer = NewStripeCustomer.new
+    if customer.create(current_user, params[:stripe_token])
+      if @subscription = current_user.create_subscription
+        redirect_to root_path, :notice => "Thank you for subscribing to our services."
+      else
+        render '/home/index'
+      end
     else
-      render '/home/index'
+      @subscription = current_user.build_subscription
+      flash.now[:notice] = customer.errors.join(", ")
+      render '/home/index', notice: customer.errors.join(", ")
     end
   end
 
@@ -16,15 +22,10 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-
   def destroy
     if current_user.subscription.destroy
       redirect_to root_path, :notice => "Your subscription will expire at the end your subscription period."
     end
   end
-    
-  private
-  def subscription_params
-    params.require(:subscription).permit(:stripe_token)
-  end
+
 end
