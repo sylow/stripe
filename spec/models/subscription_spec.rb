@@ -7,7 +7,7 @@ describe Subscription do
 
   context '#successful subscriptions' do
     it ".creates a subscription" do
-      stripe_customer = NewStripeCustomer.new
+      stripe_customer = PaymentServices::Customer.new
       customer = stripe_customer.create(Fabricate(:user), 'xxxx')
       customer.subscriptions.count.should == 1
       Fabricate(:subscription).active.should be_true
@@ -17,7 +17,7 @@ describe Subscription do
   context '#failing subscriptions' do
     it ".returns a declined card error" do
       StripeMock.prepare_card_error(:incorrect_cvc, :new_customer)
-      customer = NewStripeCustomer.new
+      customer = PaymentServices::Customer.new
       customer.create(Fabricate(:user), 'test')
       customer.errors.should == ["We could not start your subscription because #<Stripe::CardError: (Status 402) The card's security code is incorrect>"]
     end
@@ -26,7 +26,7 @@ describe Subscription do
   context '#cancel subsciption' do
     it '.cancel successfully' do
       subscription = Fabricate(:subscription)
-      stripe_customer = NewStripeCustomer.new
+      stripe_customer = PaymentServices::Customer.new
       customer = stripe_customer.create(subscription.user, 'test_customer_sub')
       customer.subscriptions.count.should == 1
       subscription.destroy

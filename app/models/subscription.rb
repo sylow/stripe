@@ -8,6 +8,6 @@ class Subscription < ActiveRecord::Base
   private
 
   def remove_subscription_from_stripe
-    DeleteStripeSubscription.destroy(user)
+    PaymentServices::Subscription.new(user).destroy
   end
 end

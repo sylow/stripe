@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   def create
-    customer = NewStripeCustomer.new
+    customer = PaymentServices::Customer.new
     if customer.create(current_user, params[:stripe_token])
       if @subscription = current_user.create_subscription
         redirect_to root_path, :notice => "Thank you for subscribing to our services."
