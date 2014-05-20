@@ -12,10 +12,10 @@ class NewStripeCustomer
   def create(user, stripe_token)
     customer = Stripe::Customer.create(plan: PLAN_ID, description: user.email, card: stripe_token)
     user.update_attribute(:stripe_customer_token, customer.id)
-    return true
+    return customer
   rescue Stripe::CardError => e
      @errors << "We could not start your subscription because #{e.inspect}"
-     return false
+     return nil
   end
 
 end
