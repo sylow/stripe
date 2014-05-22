@@ -3,7 +3,7 @@ class StripeController < ApplicationController
 
   def webhook
     event = JSON.parse(request.body.read)
-    customer_token = event.fetch("data").fetch("object").fetch("customer")
+    customer_token = event.fetch("data").fetch("object").fetch("customer", nil)
     notification_type = event.fetch("type")
     # Transaction history
     SubscriptionHistory.create( {
